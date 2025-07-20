@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Shield } from "lucide-react";
 import useAuth from '../hooks/useAuth';
 
@@ -9,7 +9,9 @@ const Login = () => {
     type: 'Admin'
   });
 
-  const {error,loading,authenticate}=useAuth();
+  const [showDelayMessage, setShowDelayMessage] = useState(false);
+
+  const {error, loading, authenticate} = useAuth();
 
   const handleChange = (e) => {
     setForm({
@@ -20,8 +22,21 @@ const Login = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    await authenticate(form,"login");
+    await authenticate(form, "login");
   };
+
+  // Handle delay message based on loading state
+  useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(() => {
+        setShowDelayMessage(true);
+      }, 5000);
+      
+      return () => clearTimeout(timer); // Cleanup when loading changes or unmount
+    } else {
+      setShowDelayMessage(false);
+    }
+  }, [loading]);
 
   return (
     <div className="min-h-screen bg-slate-100 flex justify-center items-center py-12 px-4">
@@ -100,6 +115,14 @@ const Login = () => {
           {error && (
             <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-lg">
               <p className="font-medium text-red-700">{error}</p>
+            </div>
+          )}
+
+          {showDelayMessage && loading && (
+            <div className="mb-6 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+              <p className="font-medium text-sm text-amber-700">
+                ⏳ Please be patient! Our backend is deployed on a free tier and may take extra time to respond.
+              </p>
             </div>
           )}
 
