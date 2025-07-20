@@ -14,7 +14,6 @@ const ImportantNotes = () => {
                <li>• Regular users can only modify their own account information</li>
                <li>• Account deletion by admins is permanent and cannot be undone</li>
                <li>• Keep your login credentials secure and don't share them with others</li>
-               <li>• Contact your system administrator if you need role changes or have access issues</li>
              </ul>
            </div>
          </div>
