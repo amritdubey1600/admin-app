@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Shield } from "lucide-react";
 import useAuth from '../hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -147,9 +148,9 @@ const Login = () => {
           <div className="mt-6 text-center">
             <p className="text-slate-600">
               Don't have an account?{' '}
-              <a href="/signup" className="font-medium text-slate-700 hover:text-slate-900 underline">
+              <Link to="/signup" className="font-medium text-slate-700 hover:text-slate-900 underline">
                 Create one here
-              </a>
+              </Link>
             </p>
           </div>
         </div>
