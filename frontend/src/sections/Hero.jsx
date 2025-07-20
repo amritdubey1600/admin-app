@@ -21,11 +21,11 @@ const Hero = () => {
           A comprehensive user management system where admins control access and users manage their own profiles securely.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button onClick={ () => navigate('/signup') } className="px-8 py-4 w-fit bg-white text-slate-900 rounded-xl font-semibold hover:bg-slate-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+          <button onClick={ () => navigate('/signup') } className="px-8 py-4 w-full sm:w-fit bg-white text-slate-900 rounded-xl font-semibold hover:bg-slate-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
             Get Started
           </button>
-          <a href="#Features">
-            <button className="px-8 py-4 w-fit border-2 border-white text-white rounded-xl font-semibold hover:bg-white hover:text-slate-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+          <a href="#Features" className='w-full sm:w-fit block'>
+            <button className="px-8 py-4 w-full sm:w-fit border-2 border-white text-white rounded-xl font-semibold hover:bg-white hover:text-slate-900 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
               Learn More
             </button>
           </a>
