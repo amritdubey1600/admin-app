@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Shield } from "lucide-react";
 import useAuth from "../hooks/useAuth";
 
@@ -11,7 +11,9 @@ const Signup = () => {
     type: 'Admin'
   });
 
-  const {error,loading,authenticate}=useAuth();
+  const [showDelayMessage, setShowDelayMessage] = useState(false);
+
+  const {error, loading, authenticate} = useAuth();
 
   const handleChange = (e) => {
     setForm({
@@ -22,8 +24,21 @@ const Signup = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    await authenticate(form,"signup");
+    await authenticate(form, "signup");
   };
+
+  // Handle delay message based on loading state
+  useEffect(() => {
+    if (loading) {
+      const timer = setTimeout(() => {
+        setShowDelayMessage(true);
+      }, 5000);
+      
+      return () => clearTimeout(timer); // Cleanup when loading changes or unmount
+    } else {
+      setShowDelayMessage(false);
+    }
+  }, [loading]);
 
   return(
     <div className="min-h-screen bg-slate-100 flex justify-center items-center py-12 px-4">
@@ -64,6 +79,7 @@ const Signup = () => {
               type="text"
               name="phNo"
               value={form.phNo}
+              onInput={(e) => e.target.value = e.target.value.replace(/\D/g, '')}
               onChange={handleChange}
               required
               className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-slate-500 bg-white text-slate-900"
@@ -132,6 +148,14 @@ const Signup = () => {
           {error && (
             <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-lg">
               <p className="font-medium text-red-700">{error}</p>
+            </div>
+          )}
+
+          {showDelayMessage && loading && (
+            <div className="mb-6 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+              <p className="font-medium text-sm text-amber-700">
+                ⏳ Please be patient! Our backend is deployed on a free tier and may take extra time to respond.
+              </p>
             </div>
           )}
 
