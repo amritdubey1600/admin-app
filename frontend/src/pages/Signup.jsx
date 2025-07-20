@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Shield } from "lucide-react";
+import { Link } from 'react-router-dom';
 import useAuth from "../hooks/useAuth";
 
 const Signup = () => {  
@@ -180,9 +181,9 @@ const Signup = () => {
           <div className="mt-6 text-center">
             <p className="text-slate-600">
               Already have an account?{' '}
-              <a href="/login" className="font-medium text-slate-700 hover:text-slate-900 underline">
+              <Link to="/login" className="font-medium text-slate-700 hover:text-slate-900 underline">
                 Sign in here
-              </a>
+              </Link>
             </p>
           </div>
         </div>
