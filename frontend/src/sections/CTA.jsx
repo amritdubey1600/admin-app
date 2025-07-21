@@ -12,8 +12,8 @@ const CTA = () => {
         <p className="text-xl mb-8 text-slate-300">
           Join our secure access control system today and manage your account with confidence.
         </p>
-        <div onClick={ () => navigate('/signup') } className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="px-8 py-3 bg-white text-slate-800 rounded-lg font-semibold hover:bg-slate-50 transition-colors">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <button onClick={ () => navigate('/signup') } className="px-8 py-3 bg-white text-slate-800 rounded-lg font-semibold hover:bg-slate-50 transition-colors">
             Create Account
           </button>
           <button onClick={ () => navigate('/login') } className="px-8 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-slate-800 transition-colors">
