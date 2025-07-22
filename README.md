@@ -1,2 +1,2 @@
 # admin-app
- Live Link: https://admin-app-sypg.onrender.com/
+ Live App Link: https://admin-app-sypg.onrender.com/
