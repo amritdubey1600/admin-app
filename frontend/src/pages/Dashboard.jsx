@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [userData, setUserData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [deleteModal, setDeleteModal] = useState({
     isOpen: false,
     userToDelete: null
@@ -93,6 +94,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     async function getData() {
+      setIsLoading(true);
+      
       if (type === 'Admin') {
         try {
           const response = await fetch(`${BASE_API_URL}/api/admin/`, {
@@ -111,25 +114,40 @@ const Dashboard = () => {
       } else {
         setUserData([user]);
       }
+      
+      setIsLoading(false);
     }
 
     getData();
   }, [user, type, token]);
 
+  // Loading component
+  const LoadingSpinner = () => (
+    <div className="flex items-center justify-center py-12">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+      <span className="ml-3 text-gray-600">Loading users...</span>
+    </div>
+  );
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
       <h2 className="text-2xl font-bold mb-6 text-gray-900">Users</h2>
-      {userData.map((userVal, idx) => (
-        <UserCard 
-          key={idx} 
-          name={userVal.name} 
-          email={userVal.email} 
-          type={userVal.type} 
-          phNo={userVal.phNo}
-          onEdit={onEdit} 
-          onDelete={handleDeleteClick}
-        />
-      ))}
+      
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        userData.map((userVal, idx) => (
+          <UserCard 
+            key={idx} 
+            name={userVal.name} 
+            email={userVal.email} 
+            type={userVal.type} 
+            phNo={userVal.phNo}
+            onEdit={onEdit} 
+            onDelete={handleDeleteClick}
+          />
+        ))
+      )}
 
       <DeleteConfirmationModal
         isOpen={deleteModal.isOpen}
