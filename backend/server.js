@@ -6,6 +6,7 @@ const userRoutes=require('./routes/userRoutes');
 const adminRoutes=require('./routes/adminRoutes');
 
 const app=express();
+const PORT=process.env.PORT || 10000;
 
 app.use(cors());
 app.use(express.json());
@@ -24,7 +25,7 @@ app.get('/', (req,res)=>{
 
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>{
-    app.listen(3000, ()=>{
-        console.log("Connected to DB and server working on PORT 3000");
+    app.listen(PORT, ()=>{
+        console.log(`Connected to DB and server working on PORT ${PORT}`);
     });
 });
